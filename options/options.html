@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <style>
+            .grid {
+               display: grid;
+
+               grid-template-rows: 1fr 1fr 1fr;
+               grid-template-columns: 1fr 1fr;
+
+               gap: 2px;
+               height: 100%;
+            }
+        </style>
+        <script src="options.js"></script>
+    </head>
+
+    <body>
+        <form id="options" class="grid">
+            <label for="selector">CSS selector</label>
+            <input class="code" type="text" id="selector" readonly/>
+
+            <label for="marker">Marker code point (hex)</label>
+            <input type="text" id="marker" pattern="[0-9a-fA-F]+" title="hexadecimal value"/>
+
+            <input type="submit" id="save" value="Save changes"/>
+            <input type="submit" id="reset" value="Restore defaults "/>
+        </form>
+    </body>
+</html>

@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Userchrome Toggle Lite",
-	"version": "0.1",
+	"version": "0.1.1",
 	"description": "This simple extension allows you to toggle userChrome.css style on-the-fly.",
 	"icons": {
 		"48": "images/icon.svg"
@@ -30,6 +30,10 @@
 		}
 	},
 	"permissions": [
-        "tabs"
-	]
+        "tabs",
+        "storage"
+	],
+    "options_ui": {
+        "page": "options/options.html"
+    }
 }

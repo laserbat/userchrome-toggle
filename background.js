@@ -1,23 +1,25 @@
-const prefix = '\u180E';
+const default_marker = '180E';
 
 async function main() {
     browser.action.onClicked.addListener(styleToggle);
     browser.commands.onCommand.addListener(styleToggle);
-
-    // Generate and log the CSS selector
-    let selector = ":root[titlepreface='\\" + prefix.charCodeAt().toString(16) + "']";
-    console.log(selector);
 }
-
 
 async function styleToggle() {
     const windowInfo = await browser.windows.getCurrent();
 
-    let newprefix = prefix;
-    if (windowInfo.title === undefined || windowInfo.title.startsWith(prefix))
-        newprefix = '';
+    let res = await browser.storage.local.get('marker');
+    let marker = res.marker;
 
-    browser.windows.update(windowInfo.id, {titlePreface: newprefix});
+    if (!marker) marker = default_marker;
+
+    let marker_char = String.fromCodePoint(parseInt(Number("0x" + marker), 10));
+    let new_preface = marker_char;
+
+    if (!windowInfo.title || windowInfo.title.startsWith(new_preface))
+        new_preface = '';
+
+    browser.windows.update(windowInfo.id, {titlePreface: new_preface});
 }
 
 main();
